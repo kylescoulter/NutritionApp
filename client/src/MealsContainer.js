@@ -1,8 +1,6 @@
 import React from "react"
 import "./App.css"
-import BreakfastContainer from "./BreakfastContainer";
-import LunchContainer from "./LunchContainer"
-import DinnerContainer from "./DinnerContainer"
+import ItemsContainer from "./ItemsContainer";
 
 export default class MealsContainer extends React.Component {
 
@@ -12,13 +10,13 @@ export default class MealsContainer extends React.Component {
         return (
             <div className="MealsContainer">
                 <p>Breakfast</p>
-                <BreakfastContainer />
+                <ItemsContainer />
 
                 <p>Lunch</p>
-                <LunchContainer />
+                <ItemsContainer />
 
                 <p>Dinner</p>
-                <DinnerContainer />
+                <ItemsContainer />
             </div>
         )
     }
