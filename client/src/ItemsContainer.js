@@ -3,9 +3,9 @@ import InputMeal from "./InputMeal";
 import "./App.css"
 import {v4 as uuidv4} from "uuid";
 
-export default class BreakfastContainer extends React.Component {
+export default class ItemsContainer extends React.Component {
     state = {
-        items: [ 
+        items: [
         ]
     };
 
