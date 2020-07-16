@@ -1,5 +1,6 @@
 import React from "react"
 import "./App.css"
+import {NavLink} from "react-router-dom";
 
 export default class AccountContainer extends React.Component {
     render() {
@@ -7,7 +8,8 @@ export default class AccountContainer extends React.Component {
             <div className="AccountContainer">
                 Welcome, USER!
                 <p> </p>
-                <img src={require("./images/LogoutCustom.jpg")} alt="Log Out"/>
+                <NavLink to="/Login" ><img src={require("./images/LogoutCustom.jpg")} alt="Log Out"/></NavLink>
+
             </div>
         )
     }
