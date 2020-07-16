@@ -1,13 +1,11 @@
 import React from 'react';
 import './App.css';
-import DiaryContainer from "./DiaryContainer";
-import AccountContainer from "./AccountContainer";
+import Diary from "./Diary";
 
 function App() {
   return (
     <div className="App">
-        <AccountContainer />
-        <DiaryContainer />
+        <Diary/>
     </div>
   );
 }

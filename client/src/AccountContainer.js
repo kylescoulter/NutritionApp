@@ -6,6 +6,8 @@ export default class AccountContainer extends React.Component {
         return (
             <div className="AccountContainer">
                 Welcome, USER!
+                <p> </p>
+                <img src={require("./images/LogoutCustom.jpg")} alt="Log Out"/>
             </div>
         )
     }
