@@ -33,6 +33,14 @@ export default class InputMeal extends React.Component {
         return (
             <div className="InputMeal">
                 <form onSubmit={this.handleSubmit}>
+                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search:&nbsp;&nbsp;</label>
+                    <input
+                        type="text"
+                        placeholder="search for an item/recipe..."
+                        name="search"
+                        onChange={this.handleChange}
+                    />
+                    <p> </p>
                     <label>Item:&nbsp;&nbsp;&nbsp;</label>
                     <input
                             type="text"
