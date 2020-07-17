@@ -28,3 +28,19 @@ Release Notes:
 	A simple UI for entering daily nutrition has been built.
 	
 	User entries are printed in each section of the daily nutrition.
+	
+7.16.20
+    
+    v0.2
+    
+    A login page has been created
+    
+    A register account page has been created
+    
+    The backend can store a user account in a database
+    
+    User info validation is in progress.
+    
+    An ingredient search has been added to the diary page.
+    
+    A user now has the ability to remove items from the diary page.
