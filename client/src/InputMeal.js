@@ -13,7 +13,6 @@ export default class InputMeal extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value
@@ -34,6 +33,14 @@ export default class InputMeal extends React.Component {
         return (
             <div className="InputMeal">
                 <form onSubmit={this.handleSubmit}>
+                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search:&nbsp;&nbsp;</label>
+                    <input
+                        type="text"
+                        placeholder="search for an item/recipe..."
+                        name="search"
+                        onChange={this.handleChange}
+                    />
+                    <p> </p>
                     <label>Item:&nbsp;&nbsp;&nbsp;</label>
                     <input
                             type="text"
@@ -51,7 +58,6 @@ export default class InputMeal extends React.Component {
                     />
                     <input type="submit" value="+" />
                 </form>
-
             </div>
         )
     }
