@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 import DiaryContainer from "./DiaryContainer";
 import AccountContainer from "./AccountContainer";
+import Sample from "./Sample";
+
 
 class Diary extends Component{
     render() {
@@ -9,6 +11,7 @@ class Diary extends Component{
             <div className="Diary">
                 <AccountContainer />
                 <DiaryContainer />
+                <Sample />
             </div>
         );
     }
