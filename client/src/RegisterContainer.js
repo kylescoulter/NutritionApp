@@ -29,9 +29,26 @@ class RegisterContainer extends Component {
         return this.username.length > 0 && this.password.length > 0;
     }
 
+    createAccount() {
+        fetch("http://localhost:8081/account", {
+            method:'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                email: this.email,
+                username: this.username,
+                password: this.password,
+                firstName: this.firstName,
+                lastName: this.lastName
+            })
+        }).then((response=>response.json()).then(data=>{
+            window.alert(data)
+        }))
+    }
+
     handleSubmit(event) {
         alert('Thank you for creating an account, ' + this.state.username);
         event.preventDefault();
+        this.createAccount();
         this.setState({
             submitted: true
         });
