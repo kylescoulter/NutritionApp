@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import {NavLink} from "react-router-dom";
+import {NavLink, withRouter} from "react-router-dom";
 
 class LoginContainer extends Component {
     constructor(props) {
@@ -7,13 +7,12 @@ class LoginContainer extends Component {
         this.state = {
             username: "",
             password: "",
+            successful: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-
 
 
     handleChange(event) {
@@ -26,18 +25,50 @@ class LoginContainer extends Component {
         return this.username.length > 0 && this.password.length > 0;
     }
 
-    handleSubmit(event) {
-        alert('Thank you for logging in, ' + this.state.username);
-        event.preventDefault();
-        this.setState({
-            username: "",
-            password: ""
+    validateLogin() {
+        fetch("http://localhost:8081/account/" + this.state.username)
+            .then(
+                response => {
+                    if (!response.ok) {
+                        throw new Error(response.statusText);
+                    } else {
+                        return response.json();
+                    }
+                })
+            .then((result) => {
+                    if (result.password === this.state.password) {
+                        sessionStorage.setItem(this.state.successful, "true");
+                        alert('Thank you for logging in, ' + this.state.username);
+                        this.props.history.push('/Diary');
+                    }
+                    else {
+                        alert("You have entered an incorrect password, please try again!")
+                        this.setState({
+                            username: "",
+                            password: ""
+                        });
+                    }
+                }
+            ).catch((error) => {
+                console.log('error: ' + error);
+                alert("Username or password may be incorrect, please try again or register an account!");
+                this.props.history.push('/Login');
+                this.setState({
+                    username: "",
+                    password: ""
+                });
         });
+    }
+
+    handleSubmit(event) {
+        this.validateLogin();
+        event.preventDefault();
     }
 
     handleRegister(event) {
         event.preventDefault();
     }
+
     render() {
         return(
             <div className="LoginContainer">
@@ -60,7 +91,7 @@ class LoginContainer extends Component {
                         onChange={this.handleChange}
                     />
                     <p> </p>
-                    <NavLink to='/Diary'>Login</NavLink>
+                    <button > Login </button>
                     <p> </p>
                     <NavLink to='/Register'>Register</NavLink>
                 </form>
@@ -68,4 +99,4 @@ class LoginContainer extends Component {
         )
     }
 }
-export default LoginContainer;
+export default withRouter(LoginContainer);

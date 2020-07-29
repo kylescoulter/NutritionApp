@@ -1,5 +1,6 @@
 package com.nutrinav.models
 
+
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -54,5 +55,21 @@ class AccountEntity {
 
     String getUsername() {
         return username
+    }
+
+    void setPassword(String password) {
+        this.password = password
+    }
+
+    String getPassword(){
+        return password
+    }
+
+    void setLastName(String lastName) {
+        this.lastName = lastName
+    }
+
+    String getLastName() {
+        return lastName
     }
 }
