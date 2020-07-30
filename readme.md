@@ -3,7 +3,17 @@ Nutrition Navigator will aim to include a recipe builder or analyzer which will 
 
     Setup:
     
+    Install Java SE Development Kit 12
+    
+    In Project Structure, set Project Language Level to 11
+    
     Install Node.
+    
+    Refresh Gradle (From gradle tab)
+    
+    Run Gradle build
+    
+    Run NutrinavApplication
     
     To Run From Command Line:
     
@@ -14,6 +24,7 @@ Nutrition Navigator will aim to include a recipe builder or analyzer which will 
     npm run build
     
     npm start
+    
 
 
 Release Notes:
@@ -44,3 +55,21 @@ Release Notes:
     An ingredient search has been added to the diary page.
     
     A user now has the ability to remove items from the diary page.
+    
+7.30.20
+    
+    v0.3
+    
+    The backend now stores a user account in a database
+    
+    The backend can now validate user information for login.
+    
+    A user has the ability to create a new account.
+    
+    The user’s custom ingredient database has been set up.
+    
+    A user can now add custom ingredients.
+    
+    The backend now stores the custom items in the custom ingredient database.
+    
+    A user can now search the custom ingredient database for an ingredient.
