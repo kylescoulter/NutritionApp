@@ -25,6 +25,12 @@
 --     username VARCHAR(250),
 --     password VARCHAR(250)
 -- );
+
+
 INSERT INTO account_entity VALUES
 (1, 'kscoulter@unomaha.edu', 'Kyle', 'Coulter', 'password', 'kylescoulter'),
 (2, 'test@mail.com', 'Test', 'Test', 'password', 'username');
+
+INSERT INTO ingredient_entity VALUES
+(1, 105, 'Banana'),
+(2, 95, 'Apple');

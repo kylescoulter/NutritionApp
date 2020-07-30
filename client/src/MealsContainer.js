@@ -3,6 +3,7 @@ import "./App.css"
 import ItemsList from "./ItemsList";
 import InputMeal from "./InputMeal";
 import {v4 as uuidv4} from "uuid";
+import InputCustomIngredient from "./InputCustomIngredient";
 
 export default class MealsContainer extends React.Component {
 
@@ -84,6 +85,7 @@ export default class MealsContainer extends React.Component {
     render() {
         return (
             <div className="MealsContainer">
+                <InputCustomIngredient />
                 <p>Breakfast</p>
                 <InputMeal addMealProps={this.addBreakfastItem}/>
                 <ItemsList
