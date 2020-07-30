@@ -10,7 +10,7 @@ import javax.persistence.Id
 class AccountEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id
     private String email
     private String username

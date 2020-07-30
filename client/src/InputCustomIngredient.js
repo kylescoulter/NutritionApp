@@ -54,13 +54,14 @@ export default class InputCustomIngredient extends React.Component {
                         value={this.state.cal}
                         onChange={this.handleChange}
                     />
-                    <img
-                        onClick={this.createCustomIngredient}
-                        src={require("./images/plus-circle.svg")}
-                        alt="Create" height="15" width="15"
-                        title="Create Ingredient"
-                        className="AddIngredientButton"
-                    />
+                    <button onClick={this.createCustomIngredient}>
+                        <img
+                            src={require("./images/plus-circle.svg")}
+                            alt="Create" height="13" width="13"
+                            title="Create Ingredient"
+                            className="AddIngredientButton"
+                        />
+                    </button>
                 </form>
             </div>
         )

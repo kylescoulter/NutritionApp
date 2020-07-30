@@ -22,7 +22,7 @@ class AccountController {
     @PostMapping("/account/register")
     ResponseEntity<AccountEntity> registerAccount(@RequestBody AccountEntity accountEntity) {
         AccountEntity result = accountRepository.save(accountEntity)
-        return ResponseEntity.created(new URI("/Diary/account/" + result.getId())).body(result)
+        return ResponseEntity.created(new URI("/diary/account/" + result.getId())).body(result)
     }
 
     @GetMapping("/account/{username}")
