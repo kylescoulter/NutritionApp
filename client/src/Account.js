@@ -3,25 +3,23 @@ import * as React from "react";
 class Account extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {sampleText: ''};
+        this.state = {
+            username: ''
+        };
+        this.getAccountUsername = this.getAccountUsername.bind(this);
     }
 
-    componentDidMount() {
-        fetch("http://localhost:8081/account/kylescoulter" )
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        sampleText: result.content
-                    });
-                }
-            );
-    }
+    getAccountUsername(name){
+        console.log(name);
+        this.setState( {
+            username: name
+        })
+    };
 
     render() {
         return (
             <p>
-                {this.state.sampleText}
+                {this.state.username}
             </p>
         );
     }

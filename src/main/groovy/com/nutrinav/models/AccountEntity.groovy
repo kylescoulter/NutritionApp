@@ -22,7 +22,7 @@ class AccountEntity {
 
     }
 
-    AccountEntity(int id, String email, String username, String password, String firstName, String lastName) {
+    AccountEntity(String email, String username, String password, String firstName, String lastName) {
         this.id = id
         this.email = email
         this.username = username

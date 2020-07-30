@@ -12,6 +12,7 @@ class LoginContainer extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.sendUsername = this.sendUsername.bind(this);
     }
 
 
@@ -23,6 +24,10 @@ class LoginContainer extends Component {
 
     validateForm() {
         return this.username.length > 0 && this.password.length > 0;
+    }
+
+    sendUsername() {
+        this.props.getAccountUsername(this.state.username);
     }
 
     validateLogin() {
@@ -42,7 +47,7 @@ class LoginContainer extends Component {
                         this.props.history.push('/Diary');
                     }
                     else {
-                        alert("You have entered an incorrect password, please try again!")
+                        alert("You have entered an incorrect password, please try again!");
                         this.setState({
                             username: "",
                             password: ""
@@ -60,14 +65,11 @@ class LoginContainer extends Component {
         });
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         this.validateLogin();
         event.preventDefault();
-    }
 
-    handleRegister(event) {
-        event.preventDefault();
-    }
+    };
 
     render() {
         return(
@@ -91,7 +93,8 @@ class LoginContainer extends Component {
                         onChange={this.handleChange}
                     />
                     <p> </p>
-                    <button > Login </button>
+
+                    <button onClick={this.handleSubmit}> Login </button>
                     <p> </p>
                     <NavLink to='/Register'>Register</NavLink>
                 </form>
