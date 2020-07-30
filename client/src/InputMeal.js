@@ -20,7 +20,7 @@ export default class InputMeal extends React.Component {
     }
 
     handleSubmit(event) {
-        alert('A nutritional itemName was submitted: ' + this.state.item + ": " + this.state.cal);
+        alert('A nutritional item was submitted: ' + this.state.item + ": " + this.state.cal);
         event.preventDefault();
         this.props.addMealProps(this.state.item, this.state.cal);
         this.setState({
