@@ -17,7 +17,7 @@ export default class CurrentDate extends React.Component {
     render() {
         return (
             <div className='CurrentDate'>
-                Date: {this.state.date}
+                <img src={require("./images/calendar3-event.svg")} alt="Date: " height="20" width="20"/> {this.state.date}
             </div>
         )
     }
