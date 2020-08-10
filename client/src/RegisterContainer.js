@@ -111,7 +111,7 @@ class RegisterContainer extends Component {
                         onChange={this.handleChange}
                     />
                     <p> * Required</p>
-                    <button onClick={this.handleSubmit}>Create Account</button>
+                    <button>Create Account</button>
                     <p> </p>
                     <NavLink to='/Login'>Back to Login</NavLink>
                 </form>
