@@ -12,7 +12,8 @@ class RegisterContainer extends Component {
             password: "",
             firstName: "",
             lastName: "",
-            submitted: false
+            submitted: false,
+            usernameError: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -27,6 +28,12 @@ class RegisterContainer extends Component {
     }
 
     validateForm() {
+        if (this.state.username.length === 0) {
+            this.setState({usernameError : "Please enter a valid username."});
+        }
+        else {
+            this.setState({usernameError : ""});
+        }
         return this.state.username.length > 0 && this.state.password.length > 0;
     }
 
@@ -78,7 +85,7 @@ class RegisterContainer extends Component {
                         value={this.state.username}
                         onChange={this.handleChange}
                     />
-                    <p> </p>
+                    <p> {this.state.usernameError} </p>
                     <input
                         placeholder="Password*"
                         type="text"
