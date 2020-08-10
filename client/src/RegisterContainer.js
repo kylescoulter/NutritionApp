@@ -27,7 +27,7 @@ class RegisterContainer extends Component {
     }
 
     validateForm() {
-        return this.username.length > 0 && this.password.length > 0;
+        return this.state.username.length > 0 && this.state.password.length > 0;
     }
 
     createAccount =() => {
@@ -45,13 +45,17 @@ class RegisterContainer extends Component {
     }
 
     handleSubmit(event) {
-        alert('Thank you for creating an account, ' + this.state.username);
-        event.preventDefault();
-        this.createAccount();
-        this.setState({
-            submitted: true
-        });
-
+        if (this.validateForm()) {
+            alert('Thank you for creating an account, ' + this.state.username);
+            event.preventDefault();
+            this.createAccount();
+            this.setState({
+                submitted: true
+            });
+        }
+        else {
+            alert('Please make sure to enter a valid username and password.');
+        }
 
     }
 
@@ -68,7 +72,7 @@ class RegisterContainer extends Component {
                 </p>
                 <form onSubmit={this.handleSubmit}>
                     <input
-                        placeholder="Username"
+                        placeholder="Username*"
                         type="text"
                         name="username"
                         value={this.state.username}
@@ -76,7 +80,7 @@ class RegisterContainer extends Component {
                     />
                     <p> </p>
                     <input
-                        placeholder="Password"
+                        placeholder="Password*"
                         type="text"
                         name="password"
                         value={this.state.password}
@@ -106,7 +110,7 @@ class RegisterContainer extends Component {
                         value={this.state.email}
                         onChange={this.handleChange}
                     />
-                    <p> </p>
+                    <p> * Required</p>
                     <button onClick={this.handleSubmit}>Create Account</button>
                     <p> </p>
                     <NavLink to='/Login'>Back to Login</NavLink>
