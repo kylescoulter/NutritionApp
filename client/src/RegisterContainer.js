@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
+import {NavLink, withRouter} from "react-router-dom";
 
 class RegisterContainer extends Component {
 
@@ -107,7 +108,8 @@ class RegisterContainer extends Component {
                     />
                     <p> </p>
                     <button onClick={this.handleSubmit}>Create Account</button>
-
+                    <p> </p>
+                    <NavLink to='/Login'>Back to Login</NavLink>
                 </form>
             </div>
         );
