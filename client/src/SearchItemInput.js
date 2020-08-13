@@ -3,7 +3,7 @@ import "./App.css"
 import "./searchResults.scss"
 import SearchResultModal from './SearchResultModal'
 import {InputGroup, Form, Button} from 'react-bootstrap'
-export default class InputMeal extends React.Component {
+export default class SearchItemInput extends React.Component {
 
     constructor(props) {
         super(props);
@@ -12,8 +12,7 @@ export default class InputMeal extends React.Component {
             cal: '',
             app_id: '1fbd8950',
             app_key: '3f79445dbc8bf58882f1eff5a2d6fb31',
-            resultExample: document.querySelector('#result'),
-            resultsList: []
+            resultsList: [],
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -21,7 +20,6 @@ export default class InputMeal extends React.Component {
     }
 
     searchIngredientDatabase = () => {
-
         if (this.state.item !== '') {
             fetch('https://api.edamam.com/api/food-database/v2/parser?ingr=' + this.state.item + '&app_id=1fbd8950&app_key=3f79445dbc8bf58882f1eff5a2d6fb31')
                 .then(response => {
@@ -34,18 +32,8 @@ export default class InputMeal extends React.Component {
                     })
                 .then((result) => {
                         let searchResultsList = [];
-                        let name = result.parsed[0].food.label;
-                        let calories = result.parsed[0].food.nutrients.ENERC_KCAL;
-
-                        this.setState({
-                            item: name,
-                            cal: calories,
-                            resultExample: document.querySelector('#result')
-                        });
-                        alert("Your ingredient was found: " + name + calories);
                         if (result.hints.length) {
                             result.hints.forEach(hint => {
-                                //this.insertCard(hint.food)
                                 searchResultsList.push(hint)
                             })
                         }
@@ -65,12 +53,11 @@ export default class InputMeal extends React.Component {
             item: label,
             cal: energy
         });
-        console.log(this.state.item);
-        this.props.addMealProps(this.state.item, this.state.cal);
-        this.setState({
-            item: '',
-            cal: ''
-        })
+        this.props.addMealProps(label, energy);
+        // this.setState({
+        //     item: '',
+        //     cal: ''
+        // })
     };
 
     handleChange(event) {
@@ -81,8 +68,10 @@ export default class InputMeal extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        // this.setState( {
+        //     item: ''
+        // })
     }
-
 
     render() {
         return (
@@ -98,7 +87,7 @@ export default class InputMeal extends React.Component {
                         />
                         <InputGroup.Append>
                             <Button
-                                variant="outline-secondary"
+                                variant="secondary"
                                 onClick={this.searchIngredientDatabase}
                             >
                                 <img
@@ -115,10 +104,10 @@ export default class InputMeal extends React.Component {
                 <p> </p>
                 <SearchResultModal
                     searchResults={this.state.resultsList}
+                    addItemProps={this.addItemToList}
                 />
                 <p> </p>
             </div>
-
         )
     }
 }

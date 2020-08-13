@@ -8,9 +8,13 @@ class SearchResultModal extends React.Component {
         super(props);
         this.state = {
             modalShow : false
-
         }
     }
+
+    handleClick = (label, cals) => {
+        this.props.addItemProps(label, cals);
+        this.handleModalShowHide()
+    };
 
     buildCard = (data) => {
         const energy = data.nutrients.ENERC_KCAL ? <li><b>Energy: </b><span>{data.nutrients.ENERC_KCAL.toFixed(1)}kcal</span></li> : '';
@@ -18,8 +22,8 @@ class SearchResultModal extends React.Component {
         const protein = data.nutrients.PROCNT ? <li><b>Protein: </b><span>{data.nutrients.PROCNT.toFixed(1)}g</span></li> : '';
         const fat = data.nutrients.FAT ? <li><b>Fat: </b><span>{data.nutrients.FAT.toFixed(1)}g</span></li> : 'not';
 
-        return <div className="card">
-                  <div className="card-header">
+        return <div className="card" onClick={() => this.handleClick(data.label, data.nutrients.ENERC_KCAL)}>
+                  <div className="card-header" >
                     <h3>{data.label}</h3>
                     <h4>{data.category}</h4>
                   </div>
@@ -39,7 +43,8 @@ class SearchResultModal extends React.Component {
 
     showSearchResults = () => {
         return this.props.searchResults.map(item => (
-             <div key={item.food.foodId}>
+             <div key={item.food.foodId}
+                  >
                  {this.buildCard(item.food)}
              </div>
         ))
@@ -55,7 +60,7 @@ class SearchResultModal extends React.Component {
         return (
             <div>
                 <Button
-                    variant="outline-primary"
+                    variant="primary"
                     size="sm"
                     disabled={this.props.searchResults.length <= 0}
                     onClick={() => this.handleModalShowHide()}
