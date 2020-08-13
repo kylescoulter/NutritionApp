@@ -3,7 +3,7 @@ import "./App.css"
 import ItemsList from "./ItemsList";
 import SearchItemInput from "./SearchItemInput";
 import {v4 as uuidv4} from "uuid";
-import InputCustomIngredient from "./InputCustomIngredient";
+import CustomIngredientInput from "./CustomIngredientInput";
 
 export default class MealsContainer extends React.Component {
 
@@ -85,7 +85,7 @@ export default class MealsContainer extends React.Component {
     render() {
         return (
             <div className="MealsContainer">
-                <InputCustomIngredient />
+
                 <p>Breakfast</p>
                 <SearchItemInput addMealProps={this.addBreakfastItem}/>
                 <ItemsList
@@ -109,6 +109,8 @@ export default class MealsContainer extends React.Component {
                     handleChangeProps={this.handleChange}
                     deleteItemProps={this.deleteDinnerItem}
                 />
+                <p> </p>
+                <CustomIngredientInput />
             </div>
         )
     }

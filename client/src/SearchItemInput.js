@@ -87,7 +87,7 @@ export default class SearchItemInput extends React.Component {
                         />
                         <InputGroup.Append>
                             <Button
-                                variant="outline-secondary"
+                                variant="secondary"
                                 onClick={this.searchIngredientDatabase}
                             >
                                 <img

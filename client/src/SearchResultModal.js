@@ -60,7 +60,7 @@ class SearchResultModal extends React.Component {
         return (
             <div>
                 <Button
-                    variant="outline-primary"
+                    variant="primary"
                     size="sm"
                     disabled={this.props.searchResults.length <= 0}
                     onClick={() => this.handleModalShowHide()}

@@ -1,6 +1,7 @@
 import React from "react"
 import "./App.css"
-export default class InputCustomIngredient extends React.Component {
+import {InputGroup, Form, Button} from 'react-bootstrap'
+export default class CustomIngredientInput extends React.Component {
 
     constructor(props) {
         super(props);
@@ -37,32 +38,34 @@ export default class InputCustomIngredient extends React.Component {
 
     render() {
         return (
-            <div className="InputMeal">
-                <form onSubmit={this.handleSubmit}>
-                    <label>Create a custom ingredient: </label>
-                    <input
+            <div className="CustomIngredientInput">
+                <Form onSubmit={this.handleSubmit}>
+                    Can't find what you're looking for? Add it here!
+                    <Form.Control
                         type="text"
                         placeholder="custom ingredient"
                         name="item"
                         value={this.state.item}
                         onChange={this.handleChange}
                     />
-                    <input
+                    <Form.Control
                         type="text"
                         placeholder="calories"
                         name="cal"
                         value={this.state.cal}
                         onChange={this.handleChange}
                     />
-                    <button onClick={this.createCustomIngredient}>
-                        <img
-                            src={require("./images/plus-circle.svg")}
-                            alt="Create" height="13" width="13"
-                            title="Create Ingredient"
-                            className="AddIngredientButton"
-                        />
-                    </button>
-                </form>
+                    <InputGroup.Append>
+                        <Button variant="secondary" onClick={this.createCustomIngredient}>
+                            <img
+                                src={require("./images/plus-circle.svg")}
+                                alt="Create"
+                                title="Create Ingredient"
+                                className="AddIngredientButton"
+                            />
+                        </Button>
+                    </InputGroup.Append>
+                </Form>
             </div>
         )
     }

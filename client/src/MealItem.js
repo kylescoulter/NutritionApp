@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Button, ListGroup} from 'react-bootstrap'
 
 export default class MealItem extends Component {
     constructor(props) {
@@ -11,11 +12,25 @@ export default class MealItem extends Component {
 
     render() {
         return (
-            <div>
-                <li>
-                    {this.props.item.name}, {this.props.item.cal}
-                    &nbsp;&nbsp;&nbsp;<button onClick={() => this.props.deleteItemProps(this.props.item.id)}>remove</button>
-                </li>
+            <div className="MealItem">
+                <ListGroup horizontal="xl"  >
+                    <ListGroup.Item variant="primary" action>
+                        {this.props.item.name}
+                    </ListGroup.Item>
+                    <ListGroup.Item variant="primary">
+                        Calories: {this.props.item.cal}
+                    </ListGroup.Item>
+                    <ListGroup.Item variant="primary">
+                        <Button variant="outline-primary" size="sm" onClick={() => this.props.deleteItemProps(this.props.item.id)}>
+                            <img
+                                src={require("./images/trash.svg")}
+                                alt="Remove"
+                                title="Remove Item"
+                                className="RemoveItemButton"
+                            />
+                        </Button>
+                    </ListGroup.Item>
+                </ListGroup>
             </div>
         )
     }
