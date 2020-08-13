@@ -19,6 +19,10 @@ export default class SearchItemInput extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    searchModalRef = ({handleModalShowHide}) => {
+        this.showModal = handleModalShowHide;
+    };
+
     searchIngredientDatabase = () => {
         if (this.state.item !== '') {
             fetch('https://api.edamam.com/api/food-database/v2/parser?ingr=' + this.state.item + '&app_id=1fbd8950&app_key=3f79445dbc8bf58882f1eff5a2d6fb31')
@@ -38,14 +42,14 @@ export default class SearchItemInput extends React.Component {
                             })
                         }
                         this.setState( {
-                            resultsList: searchResultsList
+                            resultsList: searchResultsList,
                         });
+                        this.showModal();
                     }
                 ).catch((error) => {
                 console.log('error: ' + error);
             });
         }
-
     };
 
     addItemToList = (label, energy) => {
@@ -103,6 +107,7 @@ export default class SearchItemInput extends React.Component {
                 </Form>
                 <p> </p>
                 <SearchResultModal
+                    ref={this.searchModalRef}
                     searchResults={this.state.resultsList}
                     addItemProps={this.addItemToList}
                 />
