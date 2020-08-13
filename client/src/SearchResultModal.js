@@ -8,7 +8,7 @@ class SearchResultModal extends React.Component {
         super(props);
         this.state = {
             modalShow : false
-        }
+        };
     }
 
     handleClick = (label, cals) => {
@@ -42,15 +42,40 @@ class SearchResultModal extends React.Component {
     };
 
     showSearchResults = () => {
+        return <Modal
+            show={this.state.modalShow}
+            size="lg"
+            autoFocus
+            aria-labelledby="contained-modal-title-vcenter"
+            centered={true}
+            scrollable={true}
+            animation={true}
+        >
+            <Modal.Header closeButton onClick={() => this.handleModalShowHide()}>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    Results:
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                {this.populateResults()}
+
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={() => this.handleModalShowHide()}>Close</Button>
+            </Modal.Footer>
+        </Modal>
+    };
+
+    populateResults = () => {
         return this.props.searchResults.map(item => (
-             <div key={item.food.foodId}
-                  >
-                 {this.buildCard(item.food)}
-             </div>
+            <div key={item.food.foodId}
+            >
+                {this.buildCard(item.food)}
+            </div>
         ))
     };
 
-    handleModalShowHide =() => {
+    handleModalShowHide = () => {
         this.setState({
             modalShow: !this.state.modalShow
         })
@@ -59,36 +84,7 @@ class SearchResultModal extends React.Component {
     render() {
         return (
             <div>
-                <Button
-                    variant="primary"
-                    size="sm"
-                    disabled={this.props.searchResults.length <= 0}
-                    onClick={() => this.handleModalShowHide()}
-                >
-                    Open Search Results {this.props.searchResults.length > 0 ? this.props.searchResults.length : ''}
-                </Button>
-                <Modal
-                    show={this.state.modalShow}
-                    size="lg"
-                    autoFocus
-                    aria-labelledby="contained-modal-title-vcenter"
-                    centered={true}
-                    scrollable={true}
-                    animation={true}
-                >
-                    <Modal.Header closeButton onClick={() => this.handleModalShowHide()}>
-                        <Modal.Title id="contained-modal-title-vcenter">
-                            Results:
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        {this.showSearchResults()}
-
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={() => this.handleModalShowHide()}>Close</Button>
-                    </Modal.Footer>
-                </Modal>
+                {this.showSearchResults()}
             </div>
         )
     }
