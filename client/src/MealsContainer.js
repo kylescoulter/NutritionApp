@@ -1,7 +1,7 @@
 import React from "react"
 import "./App.css"
 import ItemsList from "./ItemsList";
-import InputMeal from "./InputMeal";
+import SearchItemInput from "./SearchItemInput";
 import {v4 as uuidv4} from "uuid";
 import InputCustomIngredient from "./InputCustomIngredient";
 
@@ -87,7 +87,7 @@ export default class MealsContainer extends React.Component {
             <div className="MealsContainer">
                 <InputCustomIngredient />
                 <p>Breakfast</p>
-                <InputMeal addMealProps={this.addBreakfastItem}/>
+                <SearchItemInput addMealProps={this.addBreakfastItem}/>
                 <ItemsList
                     items={this.state.breakfastItems}
                     handleChangeProps={this.handleChange}
@@ -95,7 +95,7 @@ export default class MealsContainer extends React.Component {
                 />
 
                 <p>Lunch</p>
-                <InputMeal addMealProps={this.addLunchItem}/>
+                <SearchItemInput addMealProps={this.addLunchItem}/>
                 <ItemsList
                     items={this.state.lunchItems}
                     handleChangeProps={this.handleChange}
@@ -103,7 +103,7 @@ export default class MealsContainer extends React.Component {
                 />
 
                 <p>Dinner</p>
-                <InputMeal addMealProps={this.addDinnerItem}/>
+                <SearchItemInput addMealProps={this.addDinnerItem}/>
                 <ItemsList
                     items={this.state.dinnerItems}
                     handleChangeProps={this.handleChange}

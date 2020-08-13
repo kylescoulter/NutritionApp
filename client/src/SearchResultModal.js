@@ -18,7 +18,7 @@ class SearchResultModal extends React.Component {
         const protein = data.nutrients.PROCNT ? <li><b>Protein: </b><span>{data.nutrients.PROCNT.toFixed(1)}g</span></li> : '';
         const fat = data.nutrients.FAT ? <li><b>Fat: </b><span>{data.nutrients.FAT.toFixed(1)}g</span></li> : 'not';
 
-        return <div className="card">
+        return <div className="card" onClick={() => this.props.addItemProps(data.label, energy)}>
                   <div className="card-header">
                     <h3>{data.label}</h3>
                     <h4>{data.category}</h4>
@@ -39,7 +39,8 @@ class SearchResultModal extends React.Component {
 
     showSearchResults = () => {
         return this.props.searchResults.map(item => (
-             <div key={item.food.foodId}>
+             <div key={item.food.foodId}
+                  >
                  {this.buildCard(item.food)}
              </div>
         ))
