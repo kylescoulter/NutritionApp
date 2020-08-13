@@ -1,5 +1,8 @@
 import React from "react"
 import "./App.css"
+import "./searchResults.scss"
+import SearchResultModal from './SearchResultModal'
+import {InputGroup, Form, Button} from 'react-bootstrap'
 export default class InputMeal extends React.Component {
 
     constructor(props) {
@@ -7,15 +10,20 @@ export default class InputMeal extends React.Component {
         this.state = {
             item: '',
             cal: '',
+            app_id: '1fbd8950',
+            app_key: '3f79445dbc8bf58882f1eff5a2d6fb31',
+            resultExample: document.querySelector('#result'),
+            resultsList: []
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    searchIngredients = () => {
+    searchIngredientDatabase = () => {
+
         if (this.state.item !== '') {
-            fetch("http://localhost:8081/ingredient/" + this.state.item)
+            fetch('https://api.edamam.com/api/food-database/v2/parser?ingr=' + this.state.item + '&app_id=1fbd8950&app_key=3f79445dbc8bf58882f1eff5a2d6fb31')
                 .then(response => {
                     console.log(response.url);
                         if (!response.ok) {
@@ -25,19 +33,44 @@ export default class InputMeal extends React.Component {
                         }
                     })
                 .then((result) => {
-                        console.log(result.name);
-                        if (result.name === this.state.item) {
-                            console.log(result)
+                        let searchResultsList = [];
+                        let name = result.parsed[0].food.label;
+                        let calories = result.parsed[0].food.nutrients.ENERC_KCAL;
+
+                        this.setState({
+                            item: name,
+                            cal: calories,
+                            resultExample: document.querySelector('#result')
+                        });
+                        alert("Your ingredient was found: " + name + calories);
+                        if (result.hints.length) {
+                            result.hints.forEach(hint => {
+                                //this.insertCard(hint.food)
+                                searchResultsList.push(hint)
+                            })
                         }
-                        else {
-                            alert("This ingredient doesn't exist yet, please add it in the create custom ingredient box above!");
-                        }
+                        this.setState( {
+                            resultsList: searchResultsList
+                        });
                     }
                 ).catch((error) => {
                 console.log('error: ' + error);
             });
         }
 
+    };
+
+    addItemToList = (label, energy) => {
+        this.setState({
+            item: label,
+            cal: energy
+        });
+        console.log(this.state.item);
+        this.props.addMealProps(this.state.item, this.state.cal);
+        this.setState({
+            item: '',
+            cal: ''
+        })
     };
 
     handleChange(event) {
@@ -47,55 +80,45 @@ export default class InputMeal extends React.Component {
     }
 
     handleSubmit(event) {
-        alert('A nutritional item was submitted: ' + this.state.item + ": " + this.state.cal);
         event.preventDefault();
-        //this.props.addMealProps(this.state.item, this.state.cal);
-        // this.setState({
-        //     item: "",
-        //     cal: ""
-        // })
     }
+
 
     render() {
         return (
             <div className="InputMeal">
-                <form onSubmit={this.handleSubmit}>
-                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search:&nbsp;&nbsp;</label>
-                    <input
-                        type="text"
-                        placeholder="search for an item/recipe..."
-                        name="item"
-                        onChange={this.handleChange}
-                    />
-
-                    <button onClick={this.searchIngredients}>
-                        <img
-                        src={require("./images/search.svg")}
-                        alt="Search" height="10" width="15"
-                        title="Search"
-                        className="Search"
+                <p> </p>
+                <Form onSubmit={this.handleSubmit}>
+                    <InputGroup className="itemSearch" >
+                        <Form.Control
+                            type="text"
+                            placeholder="search for an item!"
+                            name="item"
+                            onChange={this.handleChange}
                         />
-                    </button>
+                        <InputGroup.Append>
+                            <Button
+                                variant="outline-secondary"
+                                onClick={this.searchIngredientDatabase}
+                            >
+                                <img
+                                    src={require("./images/search.svg")}
+                                    alt="Search"
+                                    title="Search"
+                                    className="Search"
 
-                    {/*<p> </p>*/}
-                    {/*<label>Item:&nbsp;&nbsp;&nbsp;</label>*/}
-                    {/*<input*/}
-                    {/*        type="text"*/}
-                    {/*        name="item"*/}
-                    {/*        value={this.state.item}*/}
-                    {/*        onChange={this.handleChange}*/}
-                    {/*/>*/}
-
-                    {/*<label>&nbsp;&nbsp;&nbsp;Calories:&nbsp;&nbsp;&nbsp;</label>*/}
-                    {/*<input*/}
-                    {/*        type="text"*/}
-                    {/*        name="cal"*/}
-                    {/*        value={this.state.cal}*/}
-                    {/*        onChange={this.handleChange}*/}
-                    {/*/>*/}
-                    {/*<input type="submit" value="+" />*/}
-                </form>
+                                />
+                            </Button>
+                        </InputGroup.Append>
+                    </InputGroup>
+                </Form>
+                <p> </p>
+                <SearchResultModal
+                    searchResults={this.state.resultsList}
+                />
+                <p> </p>
             </div>
+
         )
     }
 }
