@@ -20,7 +20,6 @@ export default class SearchItemInput extends React.Component {
     }
 
     searchIngredientDatabase = () => {
-
         if (this.state.item !== '') {
             fetch('https://api.edamam.com/api/food-database/v2/parser?ingr=' + this.state.item + '&app_id=1fbd8950&app_key=3f79445dbc8bf58882f1eff5a2d6fb31')
                 .then(response => {
@@ -54,11 +53,11 @@ export default class SearchItemInput extends React.Component {
             item: label,
             cal: energy
         });
-        this.props.addMealProps(this.state.item, this.state.cal);
-        this.setState({
-            item: '',
-            cal: ''
-        })
+        this.props.addMealProps(label, energy);
+        // this.setState({
+        //     item: '',
+        //     cal: ''
+        // })
     };
 
     handleChange(event) {
@@ -69,9 +68,9 @@ export default class SearchItemInput extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.setState( {
-            item: ''
-        })
+        // this.setState( {
+        //     item: ''
+        // })
     }
 
     render() {
@@ -109,7 +108,6 @@ export default class SearchItemInput extends React.Component {
                 />
                 <p> </p>
             </div>
-
         )
     }
 }

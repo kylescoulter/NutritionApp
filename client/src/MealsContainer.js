@@ -25,9 +25,9 @@ export default class MealsContainer extends React.Component {
 
     addBreakfastItem = (name, cals) => {
         const newMealItem = {
-            id: uuidv4,
-            name: name,
-            cal: cals
+            id: uuidv4(),
+            name: name.toString().slice(0, 30),
+            cal: Math.round(cals)
         };
         this.setState({
             breakfastItems: [...this.state.breakfastItems, newMealItem]
@@ -35,9 +35,9 @@ export default class MealsContainer extends React.Component {
     };
     addLunchItem = (name, cals) => {
         const newMealItem = {
-            id: uuidv4,
-            name: name,
-            cal: cals
+            id: uuidv4(),
+            name: name.toString().slice(0, 30),
+            cal: Math.round(cals)
         };
         this.setState({
             lunchItems: [...this.state.lunchItems, newMealItem]
@@ -45,9 +45,9 @@ export default class MealsContainer extends React.Component {
     };
     addDinnerItem = (name, cals) => {
         const newMealItem = {
-            id: uuidv4,
-            name: name,
-            cal: cals
+            id: uuidv4(),
+            name: name.toString().slice(0, 30),
+            cal: Math.round(cals)
         };
         this.setState({
             dinnerItems: [...this.state.dinnerItems, newMealItem]
