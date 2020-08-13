@@ -13,14 +13,10 @@
 }
 
 .AccountContainer {
-  background-color: lightslategrey;
-  border-radius: 100px;
   position: absolute;
-  min-width: 35vh;
   top: 5vh;
   right: 10vh;
-  font-size: calc(10px + 2vmin);
-  color: lightyellow;
+  max-height: 2px;
 }
 
 .InputMeal {

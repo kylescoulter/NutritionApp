@@ -68,7 +68,7 @@ class LoginContainer extends Component {
     handleSubmit = (event) => {
         this.validateLogin();
         event.preventDefault();
-
+        this.props.setUsernameProps(this.state.username);
     };
 
     render() {

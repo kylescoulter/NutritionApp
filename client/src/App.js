@@ -6,15 +6,30 @@ import Diary from "./Diary";
 import Login from "./Login";
 import Register from "./Register";
 
-class App extends Component{
+class App extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: ''
+        };
+    }
+
+   setAccountUsername = (name) =>{
+        this.setState( {
+                username: name
+            },
+            () => console.log(" sent to app: " + this.state.username));
+    };
+
+
     render() {
         return (
             <BrowserRouter>
                 <div className="App">
                     <Switch>
                         <Route exact path='/' component={withRouter(Home)} />
-                        <Route path='/Diary' component={withRouter(Diary)} />
-                        <Route path='/Login' component={withRouter(Login)} />
+                        <Route path='/Diary' render={() => <Diary username={this.state.username}/>} />
+                        <Route path='/Login' render={() => <Login setAccountUsernameProps={this.setAccountUsername}/>} />
                         <Route path='/Register' component={withRouter(Register)} />
                     </Switch>
                 </div>
