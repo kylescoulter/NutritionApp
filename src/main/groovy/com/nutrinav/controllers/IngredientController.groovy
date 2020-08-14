@@ -32,4 +32,9 @@ class IngredientController {
         return new ResponseEntity<IngredientEntity>(ingredientEntity, HttpStatus.OK)
     }
 
+    @GetMapping("/ingredients")
+    Collection<IngredientEntity> getAccounts() {
+        return ingredientRepository.findAll()
+    }
+
 }

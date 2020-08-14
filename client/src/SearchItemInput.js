@@ -2,7 +2,7 @@ import React from "react"
 import "./App.css"
 import "./searchResults.scss"
 import SearchResultModal from './SearchResultModal'
-import {InputGroup, Form, Button} from 'react-bootstrap'
+import {InputGroup, Form, Button, Spinner} from 'react-bootstrap'
 export default class SearchItemInput extends React.Component {
 
     constructor(props) {
@@ -13,14 +13,20 @@ export default class SearchItemInput extends React.Component {
             app_id: '1fbd8950',
             app_key: '3f79445dbc8bf58882f1eff5a2d6fb31',
             resultsList: [],
+            customResultList: []
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    searchModalRef = ({handleModalShowHide}) => {
-        this.showModal = handleModalShowHide;
+    searchModalRef = (obj) => {
+        this.showModal = obj && obj.handleModalShowHide;
+    };
+
+    search = () => {
+        this.searchIngredientDatabase();
+        return <Spinner animation={"border"} />
     };
 
     searchIngredientDatabase = () => {
@@ -44,11 +50,32 @@ export default class SearchItemInput extends React.Component {
                         this.setState( {
                             resultsList: searchResultsList,
                         });
+                        //this.showModal();
+                    }
+                ).catch((error) => {
+                console.log('error: ' + error);
+            });
+            fetch("http://localhost:8081/ingredient/" + this.state.item)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(response.statusText);
+                    } else {
+                        return response.json();
+                    }
+                })
+                .then((result) => {
+                        console.log(result);
+                        let searchResultsList = [];
+                        searchResultsList.push(result);
+                        this.setState( {
+                            customResultList: searchResultsList,
+                        });
                         this.showModal();
                     }
                 ).catch((error) => {
                 console.log('error: ' + error);
             });
+
         }
     };
 
@@ -58,10 +85,6 @@ export default class SearchItemInput extends React.Component {
             cal: energy
         });
         this.props.addMealProps(label, energy);
-        // this.setState({
-        //     item: '',
-        //     cal: ''
-        // })
     };
 
     handleChange(event) {
@@ -92,7 +115,7 @@ export default class SearchItemInput extends React.Component {
                         <InputGroup.Append>
                             <Button
                                 variant="secondary"
-                                onClick={this.searchIngredientDatabase}
+                                onClick={this.search}
                             >
                                 <img
                                     src={require("./images/search.svg")}
@@ -110,6 +133,7 @@ export default class SearchItemInput extends React.Component {
                     ref={this.searchModalRef}
                     searchResults={this.state.resultsList}
                     addItemProps={this.addItemToList}
+                    customSearchResults={this.state.customResultList}
                 />
                 <p> </p>
             </div>
