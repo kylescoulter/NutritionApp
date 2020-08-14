@@ -18,7 +18,7 @@ $max-width-mobile-xs: 400px;
   width: 100%;
   background-color: $secondary-color;
   display: flex;
-  min-height: 218px;
+  min-height: 100px;
   flex-direction: column;
   transition: all 0.2s ease;
   border: 4px solid $border-dark;

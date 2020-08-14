@@ -1,7 +1,8 @@
-import React from "react"
-import "./App.css"
+import React from "react";
+import "./App.css";
 import MealItem from "./MealItem";
-import {ListGroup} from 'react-bootstrap'
+import {ListGroup} from 'react-bootstrap';
+import {v4 as uuidv4} from 'uuid';
 
 export default class ItemsList extends React.Component {
     render() {
@@ -11,7 +12,7 @@ export default class ItemsList extends React.Component {
                    <ListGroup variant="flush" as="ul">
                        <ListGroup.Item variant="primary" >
                            <MealItem
-                               key={item.id}
+                               key={uuidv4()}
                                item={item}
                                handleChangeProps={this.props.handleChangeProps}
                                deleteItemProps={this.props.deleteItemProps}

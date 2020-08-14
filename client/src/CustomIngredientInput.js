@@ -1,6 +1,7 @@
 import React from "react"
 import "./App.css"
 import {InputGroup, Form, Button} from 'react-bootstrap'
+import CustomSearchResultModal from './CustomSearchResultModal'
 export default class CustomIngredientInput extends React.Component {
 
     constructor(props) {
@@ -8,6 +9,7 @@ export default class CustomIngredientInput extends React.Component {
         this.state = {
             item: '',
             cal: '',
+            resultsList: []
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -20,6 +22,18 @@ export default class CustomIngredientInput extends React.Component {
         });
     }
 
+    searchModalRef = (obj) => {
+        this.showModal = obj && obj.handleModalShowHide;
+    };
+
+    addItemToList = (label, energy) => {
+        this.setState({
+            item: label,
+            cal: energy
+        });
+        this.props.addMealProps(label, energy);
+    };
+
     createCustomIngredient = () => {
         fetch("http://localhost:8081/ingredient/create", {
             method: 'POST',
@@ -29,7 +43,34 @@ export default class CustomIngredientInput extends React.Component {
                 calories: this.state.cal,
             })
         }).then((response => response.json())).then(body => console.log(body))
-    }
+    };
+
+    fetchCustomIngredients = () => {
+        fetch("http://localhost:8081/ingredients")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                } else {
+                    return response.json();
+                }
+            })
+                .then((result) => {
+
+                        let searchResultsList = [];
+                        if (result.length) {
+                            result.forEach(hint => {
+                                searchResultsList.push(hint)
+                            })
+                        }
+                        this.setState( {
+                            resultsList: searchResultsList,
+                        });
+                        this.showModal();
+                    }
+                ).catch((error) => {
+                    console.log('error: ' + error);
+                });
+    };
 
     handleSubmit(event) {
         alert('A custom ingredient was added: ' + this.state.item );
@@ -65,6 +106,20 @@ export default class CustomIngredientInput extends React.Component {
                             />
                         </Button>
                     </InputGroup.Append>
+
+                    <Button variant="outline-success" onClick={this.fetchCustomIngredients}>
+                        <img
+                            src={require("./images/search.svg")}
+                            alt="SearchCustom"
+                            title="Search Custom Ingredients"
+                            className="SearchCustomIngredientButton"
+                        />
+                    </Button>
+                    <CustomSearchResultModal
+                        ref={this.searchModalRef}
+                        searchResults={this.state.resultsList}
+                        addItemProps={this.addItemToList}
+                    />
                 </Form>
             </div>
         )
