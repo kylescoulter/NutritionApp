@@ -1,8 +1,12 @@
-import React, {Component} from 'react';
+import React from 'react';
 import RegisterContainer from "./RegisterContainer";
 import BaseAppHeader from "./BaseAppHeader";
 
-class Register extends Component {
+class Register extends React.Component {
+    constructor(props){
+        super(props);
+    }
+
     render() {
         return (
             <div className="Register">
