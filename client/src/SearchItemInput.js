@@ -33,7 +33,6 @@ export default class SearchItemInput extends React.Component {
         if (this.state.item !== '') {
             fetch('https://api.edamam.com/api/food-database/v2/parser?ingr=' + this.state.item + '&app_id=1fbd8950&app_key=3f79445dbc8bf58882f1eff5a2d6fb31')
                 .then(response => {
-                    console.log(response.url);
                         if (!response.ok) {
                             throw new Error(response.statusText);
                         } else {
@@ -50,7 +49,6 @@ export default class SearchItemInput extends React.Component {
                         this.setState( {
                             resultsList: searchResultsList,
                         });
-                        //this.showModal();
                     }
                 ).catch((error) => {
                 console.log('error: ' + error);
@@ -60,22 +58,23 @@ export default class SearchItemInput extends React.Component {
                     if (!response.ok) {
                         throw new Error(response.statusText);
                     } else {
-                        return response.json();
+                        return response.json()
                     }
                 })
                 .then((result) => {
                         console.log(result);
                         let searchResultsList = [];
-                        searchResultsList.push(result);
-                        this.setState( {
-                            customResultList: searchResultsList,
-                        });
-                        this.showModal();
+                        if (result) {
+                            searchResultsList.push(result);
+                            this.setState( {
+                                customResultList: searchResultsList,
+                            });
+                        }
                     }
                 ).catch((error) => {
                 console.log('error: ' + error);
             });
-
+            this.showModal();
         }
     };
 
@@ -122,7 +121,6 @@ export default class SearchItemInput extends React.Component {
                                     alt="Search"
                                     title="Search"
                                     className="Search"
-
                                 />
                             </Button>
                         </InputGroup.Append>
