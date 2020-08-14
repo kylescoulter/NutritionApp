@@ -15,7 +15,7 @@ class Login extends Component{
     setUsername = (name) => {
         this.setState( {
             username: name
-        }, () => console.log("username was sent to parent " + this.state.username));
+        });
         this.props.setAccountUsernameProps(name);
     };
 

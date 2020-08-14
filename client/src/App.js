@@ -17,8 +17,7 @@ class App extends React.Component{
    setAccountUsername = (name) =>{
         this.setState( {
                 username: name
-            },
-            () => console.log(" sent to app: " + this.state.username));
+            });
     };
 
 

@@ -11,7 +11,8 @@ class RegisterContainer extends Component {
             password: "",
             firstName: "",
             lastName: "",
-            submitted: false
+            submitted: false,
+            usernameError: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -26,10 +27,17 @@ class RegisterContainer extends Component {
     }
 
     validateForm() {
-        return this.username.length > 0 && this.password.length > 0;
-    }
+        if (this.state.username.length === 0) {
+            this.setState({usernameError : "Please enter a valid username."});
+        }
+        else {
+            this.setState({usernameError : ""});
+        }
+        return this.state.username.length > 0 && this.state.password.length > 0;
+    };
 
-    createAccount =() => {
+    createAccount = () => {
+
         fetch("http://localhost:8081/account/register", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -40,24 +48,42 @@ class RegisterContainer extends Component {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName
             })
-        }).then((response => response.json())).then(body => console.log(body))
-    }
+            }).then((response =>  {
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                } else {
+                    return response.json();
+                }
+            }))
+            .then(body => {
+                    console.log(body)
+            })
+            .catch((error) => {
+                    console.log('error: ' + error);
+                })
+    };
 
-    handleSubmit(event) {
-        alert('Thank you for creating an account, ' + this.state.username);
+    handleSubmit = (event) => {
         event.preventDefault();
-        this.createAccount();
-        this.setState({
-            submitted: true
-        });
+        if (this.validateForm()) {
+            alert('Thank you for creating an account, ' + this.state.username);
+            this.createAccount();
+            this.setState({
+                submitted: true
+            });
+      } else {
+            alert('Please make sure to enter a valid username and password.');
+      }
 
 
-    }
+
+    };
 
     render() {
-        const submitted = this.state.submitted;
-        if (submitted === true) {
-            this.state.sumbitted = false;
+        if (this.state.submitted) {
+            this.setState( {
+                submitted: false
+            });
             return <Redirect to="/Login" />
         }
         return (
@@ -65,17 +91,17 @@ class RegisterContainer extends Component {
                 <p>
                     Create An Account!
                 </p>
-                <form onSubmit={this.handleSubmit}>
+                <form>
                     <input
-                        placeholder="Username"
+                        placeholder="Username*"
                         type="text"
                         name="username"
                         value={this.state.username}
                         onChange={this.handleChange}
                     />
-                    <p> </p>
+                    <p>{this.state.usernameError}</p>
                     <input
-                        placeholder="Password"
+                        placeholder="Password*"
                         type="text"
                         name="password"
                         value={this.state.password}
@@ -105,9 +131,8 @@ class RegisterContainer extends Component {
                         value={this.state.email}
                         onChange={this.handleChange}
                     />
-                    <p> </p>
+                    <p>* Required</p>
                     <button onClick={this.handleSubmit}>Create Account</button>
-
                 </form>
             </div>
         );

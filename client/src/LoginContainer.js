@@ -74,7 +74,7 @@ class LoginContainer extends Component {
     render() {
         return(
             <div className="LoginContainer">
-                <form onSubmit={this.handleSubmit}>
+                <form>
 
                     <input
                         placeholder="username"
