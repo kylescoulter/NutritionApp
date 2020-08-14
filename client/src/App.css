@@ -8,41 +8,55 @@
   align-items: center;
   justify-content: center;
 
-  font-size: calc(10px + 2vmin);
+  /*font-size: calc(10px + 2vmin);*/
   color: slategray;
 }
 
 .AccountContainer {
-  background-color: lightslategrey;
   position: absolute;
-  min-width: 35vh;
   top: 5vh;
   right: 10vh;
-  font-size: calc(10px + 2vmin);
-  color: lightyellow;
+  max-height: 2px;
 }
 
 .InputMeal {
-  text-align: left;
-  background-color: aliceblue;
-  min-width: 70vh;
-  min-height: 4vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: left;
-  font-size: calc(2px + 2vmin);
-  color: slategray;
+  /*text-align: left;*/
+  /*background-color: aliceblue;*/
+  /*min-width: 75%;*/
+  /*min-height: 5%;*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*align-items: center;*/
+  /*justify-content: left;*/
+  /*font-size: calc(2px + 2vmin);*/
+  /*color: slategray;*/
+}
+
+.CustomIngredientInput {
+
 }
 
 .BreakfastContainer {
-  font-size: 15px;
+
+}
+
+.MealItem {
+  width: 100%;
+  justify-content: left;
+  text-align: left;
+  display: flex;
+  font-weight: normal;
+}
+
+.ItemList {
+  font-size: medium;
+  justify-content: left;
 }
 
 .MealsContainer {
-  text-align: center;
-  min-height: 55vh;
+
   background-color: lightslategrey;
+  border-radius: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;

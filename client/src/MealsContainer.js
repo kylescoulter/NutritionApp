@@ -1,8 +1,9 @@
 import React from "react"
 import "./App.css"
 import ItemsList from "./ItemsList";
-import InputMeal from "./InputMeal";
+import SearchItemInput from "./SearchItemInput";
 import {v4 as uuidv4} from "uuid";
+import CustomIngredientInput from "./CustomIngredientInput";
 
 export default class MealsContainer extends React.Component {
 
@@ -24,9 +25,9 @@ export default class MealsContainer extends React.Component {
 
     addBreakfastItem = (name, cals) => {
         const newMealItem = {
-            id: uuidv4,
-            name: name,
-            cal: cals
+            id: uuidv4(),
+            name: name.toString().slice(0, 30),
+            cal: Math.round(cals)
         };
         this.setState({
             breakfastItems: [...this.state.breakfastItems, newMealItem]
@@ -34,9 +35,9 @@ export default class MealsContainer extends React.Component {
     };
     addLunchItem = (name, cals) => {
         const newMealItem = {
-            id: uuidv4,
-            name: name,
-            cal: cals
+            id: uuidv4(),
+            name: name.toString().slice(0, 30),
+            cal: Math.round(cals)
         };
         this.setState({
             lunchItems: [...this.state.lunchItems, newMealItem]
@@ -44,9 +45,9 @@ export default class MealsContainer extends React.Component {
     };
     addDinnerItem = (name, cals) => {
         const newMealItem = {
-            id: uuidv4,
-            name: name,
-            cal: cals
+            id: uuidv4(),
+            name: name.toString().slice(0, 30),
+            cal: Math.round(cals)
         };
         this.setState({
             dinnerItems: [...this.state.dinnerItems, newMealItem]
@@ -84,8 +85,9 @@ export default class MealsContainer extends React.Component {
     render() {
         return (
             <div className="MealsContainer">
+
                 <p>Breakfast</p>
-                <InputMeal addMealProps={this.addBreakfastItem}/>
+                <SearchItemInput addMealProps={this.addBreakfastItem}/>
                 <ItemsList
                     items={this.state.breakfastItems}
                     handleChangeProps={this.handleChange}
@@ -93,7 +95,7 @@ export default class MealsContainer extends React.Component {
                 />
 
                 <p>Lunch</p>
-                <InputMeal addMealProps={this.addLunchItem}/>
+                <SearchItemInput addMealProps={this.addLunchItem}/>
                 <ItemsList
                     items={this.state.lunchItems}
                     handleChangeProps={this.handleChange}
@@ -101,12 +103,14 @@ export default class MealsContainer extends React.Component {
                 />
 
                 <p>Dinner</p>
-                <InputMeal addMealProps={this.addDinnerItem}/>
+                <SearchItemInput addMealProps={this.addDinnerItem}/>
                 <ItemsList
                     items={this.state.dinnerItems}
                     handleChangeProps={this.handleChange}
                     deleteItemProps={this.deleteDinnerItem}
                 />
+                <p> </p>
+                <CustomIngredientInput />
             </div>
         )
     }
