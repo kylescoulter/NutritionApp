@@ -2,14 +2,17 @@ import React from "react"
 import "./App.css"
 import {NavLink} from "react-router-dom";
 import Card from 'react-bootstrap/Card'
-import Account from "./Account";
+import GoalInput from "./GoalInput";
 
 
 export default class AccountContainer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {username: ''};
+        this.state = {
+            username: '',
+            dailyGoal: ''
+        };
     }
 
     // componentDidMount() {
@@ -24,6 +27,14 @@ export default class AccountContainer extends React.Component {
     //         );
     // }
 
+    setAccountGoal = (goal) => {
+        this.setState( {
+            dailyGoal: goal
+        });
+        this.props.setDailyGoalProps(goal);
+
+    };
+
 
     render() {
         return (
@@ -37,6 +48,7 @@ export default class AccountContainer extends React.Component {
                         Welcome, {this.props.username}
                     </Card.Header>
                 <Card.Body>
+                    <GoalInput setGoalProps={this.setAccountGoal}/>
                 </Card.Body>
                     <NavLink to="/Login" ><img src={require("./images/box-arrow-in-right.svg")} alt="Logout" height="32" width="32" title="Logout" /></NavLink>
 
