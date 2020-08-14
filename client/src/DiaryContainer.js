@@ -11,7 +11,8 @@ export default class DiaryContainer extends React.Component {
         return (
            <div className="DiaryContainer">
                <DiaryHeader />
-               <MealsContainer />
+
+               <MealsContainer dailyGoal={this.props.dailyGoal}/>
            </div>
         )
     }
