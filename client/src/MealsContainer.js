@@ -4,6 +4,7 @@ import ItemsList from "./ItemsList";
 import SearchItemInput from "./SearchItemInput";
 import {v4 as uuidv4} from "uuid";
 import CustomIngredientInput from "./CustomIngredientInput";
+import {Form, InputGroup} from "react-bootstrap";
 
 export default class MealsContainer extends React.Component {
 
@@ -85,6 +86,20 @@ export default class MealsContainer extends React.Component {
     render() {
         return (
             <div className="MealsContainer">
+                <p> </p>
+                <InputGroup>
+
+                    <InputGroup.Prepend>
+                        <InputGroup.Text id="basic-addon1">Caloric Goal</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <Form.Control
+                        placeholder={this.props.dailyGoal}
+                        aria-label="DailyGoal"
+                        aria-describedby="basic-addon1"
+                        disabled
+                        readOnly
+                    />
+                </InputGroup>
 
                 <p>Breakfast</p>
                 <SearchItemInput addMealProps={this.addBreakfastItem}/>
