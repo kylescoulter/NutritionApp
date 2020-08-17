@@ -109,6 +109,8 @@ Nutrition Navigator will aim to include a recipe builder or analyzer which will 
     
     Added Modals for displaying results from searches.
     
+    Account Container is now a Bootstrap Card for better readability and aesthetics. 
+    
     
     
     
