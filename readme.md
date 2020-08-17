@@ -76,3 +76,40 @@ Nutrition Navigator will aim to include a recipe builder or analyzer which will 
     The backend now stores the custom items in the custom ingredient database.
     
     A user can now search the custom ingredient database for an ingredient.
+    
+8.17.20
+
+    v0.4 
+    
+    A user can now send a search query to the Edamam Food Database.
+    
+    A user can now see results displayed from the Edamam DB search.
+    
+    A user can now search the custom ingredient database.
+    
+    A user can now see a display of all items added to the custom ingredient database.
+    
+    A user search now displays results from both Edamam db and Custom Ingredient db.
+    
+    A user can now add items to each respective meal (breakfast, lunch, dinner).
+    
+    A user can now correctly delete items without deleting every item.
+    
+    A user can now enter in a caloric goal in the account container.
+    
+    The diary page now displays the entered caloric goal in the meals container.
+    
+    The diary page now keeps track of the logged in user.
+    
+    The account container now displays the logged in user's username.
+    
+    React Bootstrap was added in the diary page to enhance the aesthetic of the app.
+    
+    Spock has been integrated into the project.
+    
+    Added Modals for displaying results from searches.
+    
+    
+    
+    
+    
