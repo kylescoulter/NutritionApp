@@ -11,14 +11,19 @@ class Diary extends React.Component{
         super(props);
         this.state = {
             username: this.props.username,
-            dailyGoal: ''
+            dailyGoal: '2000'
         };
     }
 
     setDailyGoal = (goal) => {
-        this.setState({
-            dailyGoal: goal
-        })
+        if (goal < 1200) {
+            alert("Setting a calorie goal under 1200 calories is not safe.")
+        }
+        else {
+            this.setState({
+                dailyGoal: goal
+            })
+        }
     };
 
     render() {
