@@ -43,6 +43,8 @@ export default class CustomIngredientInput extends React.Component {
                 calories: this.state.cal,
             })
         }).then((response => response.json())).then(body => console.log(body))
+        alert('A custom ingredient was added: ' + this.state.item );
+
     };
 
     fetchCustomIngredients = () => {
