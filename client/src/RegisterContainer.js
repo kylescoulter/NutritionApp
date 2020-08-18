@@ -12,7 +12,8 @@ class RegisterContainer extends Component {
             firstName: "",
             lastName: "",
             submitted: false,
-            usernameError: ""
+            usernameError: "",
+            passwordError: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -32,6 +33,12 @@ class RegisterContainer extends Component {
         }
         else {
             this.setState({usernameError : ""});
+        }
+        if (this.state.password.length === 0) {
+            this.setState({passwordError : "Please enter a valid password."});
+        }
+        else {
+            this.setState({passwordError : ""});
         }
         return this.state.username.length > 0 && this.state.password.length > 0;
     };
@@ -71,12 +78,7 @@ class RegisterContainer extends Component {
             this.setState({
                 submitted: true
             });
-      } else {
-            alert('Please make sure to enter a valid username and password.');
-      }
-
-
-
+        }
     };
 
     render() {
@@ -107,7 +109,7 @@ class RegisterContainer extends Component {
                         value={this.state.password}
                         onChange={this.handleChange}
                     />
-                    <p> </p>
+                    <p>{this.state.passwordError}</p>
                     <input
                         placeholder="First Name"
                         type="text"
