@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity
 import java.util.Scanner
 
 
-class ExampleSpecification extends Specification {
+class NutrinavApplicationTests extends Specification {
     ApplicationContext context = new AnnotationConfigApplicationContext("com.nutrinav")
     AccountController accountController = context.getBean(AccountController.class)
     AccountEntity accountEntity
