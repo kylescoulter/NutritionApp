@@ -10,15 +10,22 @@ class Diary extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            username: this.props.username
+            username: this.props.username,
+            dailyGoal: ''
         };
     }
+
+    setDailyGoal = (goal) => {
+        this.setState({
+            dailyGoal: goal
+        })
+    };
 
     render() {
         return (
             <div className="Diary">
-                <AccountContainer username={this.state.username} />
-                <DiaryContainer />
+                <AccountContainer username={this.state.username} setDailyGoalProps={this.setDailyGoal} />
+                <DiaryContainer dailyGoal={this.state.dailyGoal}/>
                 <Sample />
             </div>
         );
