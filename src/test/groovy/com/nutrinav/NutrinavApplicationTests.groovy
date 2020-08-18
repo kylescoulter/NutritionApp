@@ -28,6 +28,31 @@ class NutrinavApplicationTests extends Specification {
         accountEntity.password == "password"
         accountEntity.username == "username"
     }
+    def "AccountEntity is changed"() {
+        when:
+        accountEntity = new AccountEntity("email", "username", "password", "firstName", "lastName")
+        accountEntity.setEmail("changed email")
+        accountEntity.setFirstName("changed firstName")
+        accountEntity.setLastName("changed lastName")
+        accountEntity.setPassword("changed password")
+        accountEntity.setUsername("changed username")
+        then:
+        accountEntity.email == "changed email"
+        accountEntity.firstName == "changed firstName"
+        accountEntity.lastName == "changed lastName"
+        accountEntity.password == "changed password"
+        accountEntity.username == "changed username"
+    }
+    def "AccountEntity's values are read'"() {
+        when:
+        accountEntity = new AccountEntity("email", "username", "password", "firstName", "lastName")
+        then:
+        accountEntity.getEmail() == "email"
+        accountEntity.getFirstName() == "firstName"
+        accountEntity.getLastName() == "lastName"
+        accountEntity.getPassword() == "password"
+        accountEntity.getUsername() == "username"
+    }
     def "AccountEntity is added to database"() {
         when:
         accountEntity = new AccountEntity("email", "username", "password", "firstName", "lastName")
@@ -42,6 +67,22 @@ class NutrinavApplicationTests extends Specification {
         then:
         ingredientEntity.name == "name"
         ingredientEntity.calories == 100
+    }
+    def "IngredientEntity is changed"() {
+        when:
+        def ingredientEntity = new IngredientEntity("name", 100)
+        ingredientEntity.setName("new name")
+        ingredientEntity.setCalories(200)
+        then:
+        ingredientEntity.name == "new name"
+        ingredientEntity.calories == 200
+    }
+    def "IngredientEntity's values are read'"() {
+        when:
+        def ingredientEntity = new IngredientEntity("name", 100)
+        then:
+        ingredientEntity.getName() == "name"
+        ingredientEntity.getCalories() == 100
     }
     def "IngredientEntity is added to database"() {
         when:
